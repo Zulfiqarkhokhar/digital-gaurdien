@@ -56,7 +56,7 @@ export default function ChildInterface() {
       }}>
       <View
         style={{
-          backgroundColor: '#6A00BF',
+          backgroundColor: '#190152',
           width: 370,
           height: 80,
           justifyContent: 'center',
@@ -83,7 +83,7 @@ export default function ChildInterface() {
       </View> */}
       <View
         style={{
-          backgroundColor: '#6A00BF',
+          backgroundColor: '#190152',
           height: 10,
           width: 320,
           borderRadius: 20,
@@ -110,7 +110,7 @@ export default function ChildInterface() {
                 </View>
                 <View style={{marginRight: 20, marginTop: 10}}>
                   <Switch
-                    trackColor={{false: '#767577', true: '#6A00BF'}}
+                    trackColor={{false: '#767577', true: '#190152'}}
                     thumbColor="#fff"
                     ios_backgroundColor="#3e3e3e"
                     onValueChange={() => onToggleChange(index)} // Corrected this line
@@ -129,7 +129,7 @@ export default function ChildInterface() {
       <View
         style={{
           width: 360,
-          backgroundColor: '#6A00BF',
+          backgroundColor: '#190152',
           height: 60,
           marginTop: 10,
         }}>

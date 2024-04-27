@@ -63,7 +63,7 @@ export default function ChildLogin({navigation}) {
                 onPress={() => navigation.navigate('Login')}
                 variant="outline"
                 _text={{
-                  color: '#6A00BF',
+                  color: '#190152',
                   fontWeight: 'medium',
                   fontSize: 'sm',
                 }}
@@ -146,17 +146,17 @@ const styles = StyleSheet.create({
   btn1: {
     width: 140,
     height: 50,
-    backgroundColor: '#6A00BF',
+    backgroundColor: '#190152',
   },
   btn2: {
     width: 140,
     height: 50,
-    color: '#6A00BF',
+    color: '#190152',
   },
   btn3: {
     width: 280,
     height: 50,
-    backgroundColor: '#6A00BF',
+    backgroundColor: '#190152',
   },
   input: {
     width: 280,

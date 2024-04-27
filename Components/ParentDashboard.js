@@ -59,12 +59,31 @@ export default function ParentDashboard({navigation}) {
       }
       case 'Data Usage': {
         navigation.navigate('DataUsage');
+        break;
+      }
+      case 'Screen Time': {
+        navigation.navigate('ScreenTime');
+        break;
       }
       case 'Block App': {
         navigation.navigate('Applications');
+        break;
       }
       case 'Camera': {
         navigation.navigate('Camera');
+        break;
+      }
+      case 'Activity': {
+        navigation.navigate('Geo');
+        break;
+      }
+      case 'Audio': {
+        navigation.navigate('AppInfo');
+        break;
+      }
+      case 'Notification': {
+        navigation.navigate('ScreenTime');
+        break;
       }
     }
   };
@@ -82,7 +101,7 @@ export default function ParentDashboard({navigation}) {
 
         <View
           style={{
-            backgroundColor: '#6A00BF',
+            backgroundColor: '#190152',
             width: 360,
             height: 250,
             marginBottom: 30,
@@ -192,7 +211,7 @@ export default function ParentDashboard({navigation}) {
             flexDirection: 'row',
             width: 360,
             backgroundColor: 'white',
-            margin: 30,
+            margin: 20,
           }}>
           <FlatList
             data={featureData}
@@ -218,7 +237,7 @@ export default function ParentDashboard({navigation}) {
                     }}>
                     <TouchableOpacity
                       onPress={() => handleClick(item.item.name)}>
-                      <Image source={item.item.icon} />
+                      <Image source={item.item.icon} style={{}} />
                     </TouchableOpacity>
                   </View>
                   <Text style={{fontSize: 14, fontWeight: 'bold'}}>
@@ -234,8 +253,12 @@ export default function ParentDashboard({navigation}) {
         <View
           style={{
             width: 360,
-            backgroundColor: '#6A00BF',
+            backgroundColor: '#190152',
             height: 60,
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
           }}>
           <View
             style={{
@@ -260,7 +283,7 @@ export default function ParentDashboard({navigation}) {
                 style={{marginTop: 20}}
               />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
               <Image
                 size={150}
                 source={require('../appAssets/footer/profile.png')}

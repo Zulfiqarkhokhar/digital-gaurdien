@@ -56,6 +56,8 @@ const Geofencing = () => {
     const latitude = parseFloat(geofence.latitude);
     const longitude = parseFloat(geofence.longitude);
     const radius = parseFloat(geofence.radius);
+
+    console.log(typeof latitude);
     setGeofence({
       latitude: parseFloat(latitude),
       longitude: parseFloat(longitude),
@@ -98,19 +100,19 @@ const Geofencing = () => {
         <TextInput
           placeholder="Latitude"
           keyboardType="numeric"
-          value={geofence.latitude.toString()}
+          value={geofence.latitude}
           onChangeText={text => setGeofence({...geofence, latitude: text})}
         />
         <TextInput
           placeholder="Longitude"
           keyboardType="numeric"
-          value={geofence.longitude.toString()}
+          value={geofence.longitude}
           onChangeText={text => setGeofence({...geofence, longitude: text})}
         />
         <TextInput
           placeholder="Radius (in meters)"
           keyboardType="numeric"
-          value={geofence.radius.toString()}
+          value={geofence.radius}
           onChangeText={text => setGeofence({...geofence, radius: text})}
         />
         <Button title="Update Geofence" onPress={updateGeofence} />

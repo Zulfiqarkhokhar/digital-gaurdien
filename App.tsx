@@ -10,7 +10,15 @@ import SignupChild from './Components/SignupChild';
 import Location from './Components/Location';
 // import DataUsage from './Components/DataUsage';
 import Applications from './Components/Applications';
-import Geofencing from './Components/Geofencing';
+import Profile from './Components/Profile';
+import Loading from './Components/Loading';
+import SplashScreen from './Components/SplashScreen';
+import Geo from './Components/Geo';
+import AppInfo from './Components/AppInfo';
+import ScreenTimeComponent from './Components/ScreenTimeComponent';
+import SetScreenTime from './Components/SetScreenTime';
+import CameraComponent from './Components/CameraComponent';
+// import AppInfo from './Components/AppInfo';
 
 const Stack = createStackNavigator();
 export default function App() {
@@ -24,19 +32,93 @@ export default function App() {
     //   <SignupChild />
     // </View>
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Login"
-        screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Signup" component={Signup} />
-        <Stack.Screen name="SignupChild" component={SignupChild} />
-        <Stack.Screen name="ChildLogin" component={ChildLogin} />
-        <Stack.Screen name="ParentDashboard" component={ParentDashboard} />
-        <Stack.Screen name="ChildInterface" component={ChildInterface} />
-        <Stack.Screen name="Location" component={Location} />
+      <Stack.Navigator initialRouteName="Splash">
+        <Stack.Screen
+          name="Splash"
+          component={SplashScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Signup"
+          component={Signup}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SignupChild"
+          component={SignupChild}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ChildLogin"
+          component={ChildLogin}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ParentDashboard"
+          component={ParentDashboard}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ChildInterface"
+          component={ChildInterface}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Location"
+          component={Location}
+          options={{headerShown: false}}
+        />
         {/* <Stack.Screen name="DataUsage" component={DataUsage} /> */}
-        <Stack.Screen name="Applications" component={Applications} />
-        <Stack.Screen name="Camera" component={Geofencing} />
+        <Stack.Screen
+          name="Applications"
+          component={Applications}
+          options={{headerShown: false}}
+        />
+        {/* <Stack.Screen
+          name="Camera"
+          component={Geofencing}
+          options={{headerShown: false}}
+        /> */}
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AppInfo"
+          component={AppInfo}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Loading"
+          component={Loading}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Geo"
+          component={Geo}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ScreenTime"
+          component={ScreenTimeComponent}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SetScreenTime"
+          component={SetScreenTime}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Camera"
+          component={CameraComponent}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
