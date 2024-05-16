@@ -98,7 +98,7 @@ const Profile = ({navigation}) => {
             Help Center
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text
             style={{
               textAlign: 'center',

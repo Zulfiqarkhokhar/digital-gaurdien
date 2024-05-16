@@ -24,6 +24,7 @@ class MainApplication : Application(), ReactApplication {
               add(GeofencingPackage())
               add(BlockAppPackage())
               add(ScreenTimePackage())
+              add(CameraPackage())
             }
 
         override fun getJSMainModuleName(): String = "index"

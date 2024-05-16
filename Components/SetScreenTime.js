@@ -1,9 +1,10 @@
-import {View, Text} from 'react-native';
+import {View, Text, Image} from 'react-native';
+import ClockSlider from './ClockSlider';
 
-function SetScreenTime() {
+function SetScreenTime({navigation}) {
   return (
-    <View>
-      <Text>Hello</Text>
+    <View style={{flex: 1}}>
+      <ClockSlider navigation={navigation} />
     </View>
   );
 }

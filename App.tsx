@@ -18,7 +18,13 @@ import AppInfo from './Components/AppInfo';
 import ScreenTimeComponent from './Components/ScreenTimeComponent';
 import SetScreenTime from './Components/SetScreenTime';
 import CameraComponent from './Components/CameraComponent';
+import DataUsage from './Components/DataUsage';
+import Notifications from './Components/Notifications';
+// import Audio from './Components/Audio';
 // import AppInfo from './Components/AppInfo';
+import {AuthProvider} from './Components/AuthContext';
+import ScreenShot from './Components/ScreenShot';
+import ChildList from './Components/ChildList';
 
 const Stack = createStackNavigator();
 export default function App() {
@@ -31,96 +37,118 @@ export default function App() {
     //   {/* <ChildLogin /> */}
     //   <SignupChild />
     // </View>
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Splash">
-        <Stack.Screen
-          name="Splash"
-          component={SplashScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Signup"
-          component={Signup}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="SignupChild"
-          component={SignupChild}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="ChildLogin"
-          component={ChildLogin}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="ParentDashboard"
-          component={ParentDashboard}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="ChildInterface"
-          component={ChildInterface}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Location"
-          component={Location}
-          options={{headerShown: false}}
-        />
-        {/* <Stack.Screen name="DataUsage" component={DataUsage} /> */}
-        <Stack.Screen
-          name="Applications"
-          component={Applications}
-          options={{headerShown: false}}
-        />
-        {/* <Stack.Screen
-          name="Camera"
-          component={Geofencing}
+    <AuthProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Splash">
+          <Stack.Screen
+            name="Splash"
+            component={SplashScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Signup"
+            component={Signup}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="SignupChild"
+            component={SignupChild}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="ChildLogin"
+            component={ChildLogin}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="ParentDashboard"
+            component={ParentDashboard}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="ChildInterface"
+            component={ChildInterface}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Location"
+            component={Location}
+            options={{headerShown: false}}
+          />
+          {/* <Stack.Screen name="DataUsage" component={DataUsage} /> */}
+          <Stack.Screen
+            name="Applications"
+            component={Applications}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Profile"
+            component={Profile}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="AppInfo"
+            component={AppInfo}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Loading"
+            component={Loading}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Geo"
+            component={Geo}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="ScreenTime"
+            component={ScreenTimeComponent}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="SetScreenTime"
+            component={SetScreenTime}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Camera"
+            component={CameraComponent}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="DataUsage"
+            component={DataUsage}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Notifications"
+            component={Notifications}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Screen"
+            component={ScreenShot}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Children"
+            component={ChildList}
+            options={{headerShown: false}}
+          />
+          {/* <Stack.Screen
+          name="Audio"
+          component={Audio}
           options={{headerShown: false}}
         /> */}
-        <Stack.Screen
-          name="Profile"
-          component={Profile}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="AppInfo"
-          component={AppInfo}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Loading"
-          component={Loading}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Geo"
-          component={Geo}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="ScreenTime"
-          component={ScreenTimeComponent}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="SetScreenTime"
-          component={SetScreenTime}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Camera"
-          component={CameraComponent}
-          options={{headerShown: false}}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
 

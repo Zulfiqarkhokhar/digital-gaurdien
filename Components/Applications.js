@@ -1,28 +1,51 @@
 import {icon} from '@fortawesome/fontawesome-svg-core';
 import React, {useEffect, useState} from 'react';
 import {View, Text, FlatList, Image, Button, TextInput} from 'react-native';
-import {InstalledApps} from 'react-native-launcher-kit';
 // import {NativeModules} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useRoute} from '@react-navigation/native';
+import {useAuth} from './AuthContext';
+
 const Applications = () => {
   const [apps, setApps] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filter, setFilter] = useState([]);
 
+  const route = useRoute();
+  const {childId} = route.params;
+
+  const {token} = useAuth();
+  console.log(token);
+
   useEffect(() => {
-    const fetchInstalledApps = () => {
+    const fetchAllApps = async () => {
       try {
-        const res = InstalledApps.getApps();
-        setApps(res);
-        setFilter(res);
-        // console.log(res);
-        console.log(icon);
-      } catch (error) {
-        console.error('Error fetching installed apps:', error);
+        let response = await fetch(
+          `https://digital-guardian-backend.vercel.app/api/apps/get-apps/${childId}`,
+          {
+            method: 'GET',
+            headers: {
+              'content-Type': 'application/json',
+              Authorization: token,
+            },
+          },
+        );
+        if (response.ok) {
+          // console.log(response);
+          response = await response.json();
+          console.log('hity puj yadhi ja');
+
+          console.log(response.applications[0].applications);
+          setApps(response.applications[0].applications);
+          setFilter(response.applications[0].applications);
+        } else {
+          console.log('an error occured');
+        }
+      } catch (e) {
+        console.log('exception occured');
       }
     };
-
-    fetchInstalledApps();
+    fetchAllApps();
   }, []);
 
   const blockApp = async () => {

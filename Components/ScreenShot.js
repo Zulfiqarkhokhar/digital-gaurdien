@@ -1,22 +1,24 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import React, {useState, useRef, useEffect} from 'react';
+import {Text, Image, View} from 'react-native';
+import ViewShot, {captureScreen} from 'react-native-view-shot';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useAuth} from './AuthContext';
 import {useRoute} from '@react-navigation/native';
 
-const CameraComponent = () => {
-  const [imageUri, setImageUri] = useState(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [imageData, setImageData] = useState([]);
+const ScreenShot = () => {
   const {token} = useAuth();
-
   const route = useRoute();
   const {childId} = route.params;
+  console.log(childId);
+
+  const [image, setImage] = useState([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
-    const fetchImages = async () => {
+    const fetchScreenShot = async () => {
       try {
         const response = await fetch(
-          `https://digital-guardian-backend.vercel.app/api/camera/get-photos/${childId}`,
+          `https://digital-guardian-backend.vercel.app/api/screencast/get-photos/${childId}`,
           {
             method: 'GET',
             headers: {
@@ -24,22 +26,16 @@ const CameraComponent = () => {
             },
           },
         );
-        const data = await response.json();
-        setImageData(data.camera || []); // Ensure imageData is an array or default to an empty array
+        const data = await response.json(); // Ensure imageData is an array or default to an empty array
         console.log(data);
+        setImage(data.screen);
       } catch (error) {
         console.error('Error fetching image from database:', error);
         // Handle error
       }
     };
-    fetchImages();
+    fetchScreenShot();
   }, []);
-
-  const handleFetchImage = () => {
-    setCurrentImageIndex(
-      currentImageIndex + 1 >= imageData.length ? 0 : currentImageIndex + 1,
-    );
-  };
 
   const formatDateTime = timestamp => {
     const date = new Date(timestamp);
@@ -53,8 +49,12 @@ const CameraComponent = () => {
     minutes = minutes < 10 ? `0${minutes}` : minutes;
     return `${formattedDate} ${hours}:${minutes} ${ampm}`;
   };
-
-  const currentImage = imageData[currentImageIndex];
+  const handleFetchImage = () => {
+    setCurrentImageIndex(
+      currentImageIndex + 1 >= image.length ? 0 : currentImageIndex + 1,
+    );
+  };
+  const currentImage = image[currentImageIndex];
 
   return (
     <View style={{flex: 1}}>
@@ -62,7 +62,7 @@ const CameraComponent = () => {
         style={{
           backgroundColor: '#190152',
           width: 370,
-          height: 80,
+          height: 60,
           justifyContent: 'center',
           alignItems: 'center',
           position: 'absolute',
@@ -78,7 +78,7 @@ const CameraComponent = () => {
         {currentImage ? (
           <Image
             source={{uri: currentImage.imageUrl}}
-            style={{width: '90%', height: 500, marginTop: 45}}
+            style={{width: 250, height: 500}}
           />
         ) : (
           <Text>No image fetched from the database</Text>
@@ -94,13 +94,11 @@ const CameraComponent = () => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Text style={{color: 'white', fontWeight: 'bold'}}>
-            Fetch Next Image
-          </Text>
+          <Text style={{color: 'white', fontWeight: 'bold'}}>Fetch Screen</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
 
-export default CameraComponent;
+export default ScreenShot;

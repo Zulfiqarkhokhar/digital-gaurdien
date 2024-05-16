@@ -1,3 +1,4 @@
+import {useRoute} from '@react-navigation/native';
 import {
   View,
   Text,
@@ -11,6 +12,10 @@ import {
 import {StyleSheet, Image, TouchableOpacity} from 'react-native';
 
 export default function ParentDashboard({navigation}) {
+  const route = useRoute();
+  const {childId} = route.params;
+  console.log(childId);
+
   const featureData = [
     {
       name: 'Location',
@@ -54,7 +59,7 @@ export default function ParentDashboard({navigation}) {
     console.log(name);
     switch (name) {
       case 'Location': {
-        navigation.navigate('Location');
+        navigation.navigate('Location', {childId});
         break;
       }
       case 'Data Usage': {
@@ -66,23 +71,27 @@ export default function ParentDashboard({navigation}) {
         break;
       }
       case 'Block App': {
-        navigation.navigate('Applications');
+        navigation.navigate('Applications', {childId});
         break;
       }
       case 'Camera': {
-        navigation.navigate('Camera');
+        navigation.navigate('Camera', {childId});
         break;
       }
-      case 'Activity': {
-        navigation.navigate('Geo');
-        break;
-      }
+      // case 'Activity': {
+      //   navigation.navigate('Geo');
+      //   break;
+      // }
       case 'Audio': {
-        navigation.navigate('AppInfo');
+        navigation.navigate('Camera1');
         break;
       }
       case 'Notification': {
-        navigation.navigate('ScreenTime');
+        navigation.navigate('Notifications');
+        break;
+      }
+      case 'Mirroring': {
+        navigation.navigate('Screen', {childId});
         break;
       }
     }
@@ -131,7 +140,7 @@ export default function ParentDashboard({navigation}) {
                   color: '#fff',
                   fontWeight: 'bold',
                 }}>
-                OPPO A12
+                Digital Gaurdian
               </Text>
             </View>
             <TouchableOpacity
@@ -168,34 +177,16 @@ export default function ParentDashboard({navigation}) {
               borderWidth: 1,
               borderColor: 'grey',
               padding: 15,
-              paddingLeft: 20,
             }}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-              Today’s Activities
-            </Text>
-            <Text
-              style={{
-                fontSize: 13,
-                fontWeight: 'bold',
-                marginTop: 3,
-              }}>
-              Click to see detailed{' '}
-            </Text>
             <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <TouchableOpacity>
-                <Image
-                  size={150}
-                  source={require('../appAssets/expand.png')}
-                  alt="Alternate Text"
-                  style={{marginTop: 20}}
-                />
-              </TouchableOpacity>
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}>
               <Image
-                size={150}
                 source={require('../appAssets/hero.png')}
                 alt="Alternate Text"
-                style={{}}
+                style={{width: '100%', height: 200}}
               />
             </View>
           </View>
@@ -224,6 +215,7 @@ export default function ParentDashboard({navigation}) {
                     flex: 1,
                     justifyContent: 'center',
                     alignItems: 'center',
+                    paddingBottom: 15,
                   }}>
                   <View
                     style={{
@@ -231,7 +223,6 @@ export default function ParentDashboard({navigation}) {
                       height: 70,
                       backgroundColor: '#EDE5F4',
                       borderRadius: 50,
-                      flex: 1,
                       justifyContent: 'center',
                       alignItems: 'center',
                     }}>

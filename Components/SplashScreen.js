@@ -4,7 +4,7 @@ import {View, Image, StyleSheet} from 'react-native';
 const SplashScreen = ({navigation}) => {
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.replace('ParentDashboard'); // Navigate to the Login screen after 3 seconds
+      navigation.replace('Login'); // Navigate to the Login screen after 3 seconds
     }, 3000);
 
     return () => clearTimeout(timer); // Cleanup the timer

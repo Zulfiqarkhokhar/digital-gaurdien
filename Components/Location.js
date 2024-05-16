@@ -1,77 +1,44 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  PermissionsAndroid,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
 import MapView, {Marker, Circle, PROVIDER_GOOGLE} from 'react-native-maps';
-import Geolocation from 'react-native-geolocation-service';
+import {useAuth} from './AuthContext';
+import {useRoute} from '@react-navigation/native';
 
 const Location = ({navigation}) => {
   const [location, setLocation] = useState(null);
-  const [areaName, setAreaName] = useState('');
+  const {token} = useAuth();
 
-  const requestLocationPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          title: 'Location Permission',
-          message: 'This app needs access to your location.',
-        },
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log('Location permission granted');
-      } else {
-        console.log('Location permission denied');
-      }
-    } catch (err) {
-      console.warn(err);
-    }
-  };
-
-  const reverseGeocode = async (latitude, longitude) => {
-    try {
-      const response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyCNDeNypWTvARbDG8AfwvwSDhhy0Dw9a7M`,
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        if (data.results && data.results.length > 0) {
-          setAreaName(data.results[0].formatted_address);
-        }
-      } else {
-        console.error('Error fetching address:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error fetching address:', error.message);
-    }
-  };
+  const route = useRoute();
+  const {childId} = route.params;
 
   useEffect(() => {
-    requestLocationPermission();
-
-    const watchId = Geolocation.watchPosition(
-      position => {
-        setLocation(position.coords);
-        reverseGeocode(position.coords.latitude, position.coords.longitude);
-      },
-      error => {
-        console.error(error);
-      },
-      {
-        enableHighAccuracy: true,
-        distanceFilter: 10, // meters
-      },
-    );
-
-    return () => {
-      Geolocation.clearWatch(watchId);
+    const getLocation = async () => {
+      try {
+        let response = await fetch(
+          `https://digital-guardian-backend.vercel.app/api/location/get-location/${childId}`,
+          {
+            method: 'GET',
+            headers: {
+              'content-Type': 'application/json',
+              Authorization: token,
+            },
+          },
+        );
+        if (response.ok) {
+          response = await response.json();
+          setLocation({
+            latitude: response.location.latitude,
+            longitude: response.location.longitude,
+          });
+        } else {
+          console.log('an error occurred');
+        }
+      } catch (e) {
+        console.log('exception occurred');
+      }
     };
+
+    getLocation();
   }, []);
 
   return (
@@ -103,6 +70,7 @@ const Location = ({navigation}) => {
           Location
         </Text>
       </View>
+
       {location && (
         <MapView
           provider={PROVIDER_GOOGLE}
@@ -138,6 +106,7 @@ const Location = ({navigation}) => {
           />
         </MapView>
       )}
+
       <View style={{margin: 20, position: 'relative', left: 10}}>
         <View
           style={{
@@ -149,9 +118,8 @@ const Location = ({navigation}) => {
             alignItems: 'center',
           }}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('Geo', {location})}>
-            <Image
-              source={require('../appAssets/features/location.png')}></Image>
+            onPress={() => navigation.navigate('Geo', {location, childId})}>
+            <Image source={require('../appAssets/features/location.png')} />
           </TouchableOpacity>
         </View>
         <Text
@@ -162,15 +130,15 @@ const Location = ({navigation}) => {
             right: 20,
             color: '#000',
           }}>
-          {' '}
           Add Geofencing
         </Text>
       </View>
       <View>
         <Text style={{fontSize: 20, fontWeight: 'bold', color: '#000'}}>
-          Current Location: Sukku IBA University
+          Current Location: Sukkur IBA University
         </Text>
       </View>
+
       <View
         style={{
           width: 360,

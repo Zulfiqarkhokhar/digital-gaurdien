@@ -9,11 +9,12 @@ import {
   Link,
   Divider,
 } from 'native-base';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, ToastAndroid} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import React, {useState} from 'react';
 import axios from 'axios';
 import Loading from './Loading';
+import {useAuth} from './AuthContext';
 
 export default function Login({navigation}) {
   const [username, setUserName] = useState('');
@@ -21,7 +22,14 @@ export default function Login({navigation}) {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [token, setToken] = useState('');
   // const [indicator, setIndicator] = useState(false);
+
+  const {login} = useAuth();
+
+  const showToast = () => {
+    ToastAndroid.show('Invalid User!', ToastAndroid.SHORT);
+  };
 
   const handleLogin = async e => {
     e.preventDefault();
@@ -40,20 +48,24 @@ export default function Login({navigation}) {
         },
       );
       // navigation.navigate('Loading,', {replace: true});
-      const responseData = await response.json();
-      console.log(responseData);
       if (response.ok) {
-        console.log(responseData.data);
+        const responseData = await response.json();
         setLoading(false);
-        navigation.navigate('ParentDashboard');
+        setToken(responseData.data);
+        console.log(responseData.data);
+        login(responseData.data);
+        navigation.navigate('Children');
         setMessage('Login successful');
         setError('');
         setIndicator(false);
         // If you want to store the token in local storage or state, you can do it here
       } else {
+        const responseData = await response.json();
         // Handle non-2xx status codes
         setError(responseData.message || 'Login failed');
         setMessage('');
+        setLoading(false);
+        showToast();
       }
     } catch (error) {
       console.log(error);
