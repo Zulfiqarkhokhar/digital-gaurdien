@@ -113,6 +113,7 @@ export default function ChildLogin({navigation}) {
                   placeholder="Password"
                   style={styles.input}
                   mt="3"
+                  secureTextEntry={true}
                   onChangeText={text => setPassword(text)}
                 />
                 <Link

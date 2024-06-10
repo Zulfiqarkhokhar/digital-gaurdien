@@ -15,7 +15,7 @@ import RNFetchBlob from 'rn-fetch-blob';
 // import LottieView from "lottie-react-native";
 import {useAuth} from './AuthContext';
 import {position} from 'native-base/lib/typescript/theme/styled-system';
-import {NativeModules} from 'react-native';
+import {NativeModules, FileSystem} from 'react-native';
 import ViewShot, {captureScreen} from 'react-native-view-shot';
 
 export default function ChildInterface() {
@@ -81,6 +81,9 @@ export default function ChildInterface() {
           const data = await response.json();
           // Handle response from backend
           console.log('Response from backend:', data);
+
+          // await FileSystem.deleteAsync(imagePath, {idempotent: true});
+          // console.log('Image deleted from file system:', imagePath);
         } catch (error) {
           console.error('Error uploading image to backend:', error);
         }
@@ -120,6 +123,8 @@ export default function ChildInterface() {
         console.log(response);
         const data = await response.json();
         console.log('Response from backend for ScreenShot:', data);
+        // await FileSystem.deleteAsync(saveImagePath, {idempotent: true});
+        // console.log('Screenshot deleted from file system:', saveImagePath);
       } catch (error) {
         console.error(
           'Error uploading image to backend for ScreenShot:',
@@ -332,8 +337,6 @@ export default function ChildInterface() {
         checkCameraPermission();
       } else if (Permissions[index].name === 'Allow Audio') {
         requestAudioPermission();
-      } else if (Permissions[index].name === 'Allow Notification') {
-        requestNotificationPermission();
       }
       return newStates;
     });
@@ -452,7 +455,7 @@ export default function ChildInterface() {
           height: 60,
           marginTop: 10,
         }}>
-        <View
+        {/* <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -483,7 +486,7 @@ export default function ChildInterface() {
               style={{marginTop: 20}}
             />
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
     </View>
   );

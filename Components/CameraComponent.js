@@ -3,7 +3,7 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {useAuth} from './AuthContext';
 import {useRoute} from '@react-navigation/native';
 
-const CameraComponent = () => {
+const CameraComponent = ({navigation}) => {
   const [imageUri, setImageUri] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageData, setImageData] = useState([]);
@@ -63,14 +63,30 @@ const CameraComponent = () => {
           backgroundColor: '#190152',
           width: 370,
           height: 80,
-          justifyContent: 'center',
+          flexDirection: 'row',
           alignItems: 'center',
           position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
         }}>
-        <Text style={{fontSize: 18, color: '#fff', fontWeight: 'bold'}}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('ParentDashboard', {childId})}>
+          <Image
+            style={{width: 30, height: 30, marginLeft: 10}}
+            source={require('../appAssets/arrow-left.png')}
+            alt="Alternate Text"
+            //   style={{ marginTop: 15, marginLeft: 15, marginRight: 5 }}
+          />
+        </TouchableOpacity>
+        <Text
+          style={{
+            fontSize: 18,
+            color: '#fff',
+            fontWeight: 'bold',
+            position: 'absolute',
+            left: 100,
+          }}>
           {currentImage ? formatDateTime(currentImage.timestamp) : ''}
         </Text>
       </View>
@@ -78,7 +94,7 @@ const CameraComponent = () => {
         {currentImage ? (
           <Image
             source={{uri: currentImage.imageUrl}}
-            style={{width: '90%', height: 500, marginTop: 45}}
+            style={{width: '90%', height: 450, marginTop: 45, borderRadius: 20}}
           />
         ) : (
           <Text>No image fetched from the database</Text>
@@ -98,6 +114,51 @@ const CameraComponent = () => {
             Fetch Next Image
           </Text>
         </TouchableOpacity>
+      </View>
+      <View
+        style={{
+          width: 360,
+          backgroundColor: '#190152',
+          height: 60,
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+        }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            marginLeft: 30,
+            marginRight: 30,
+          }}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('ParentDashboard', {childId})}>
+            <Image
+              size={150}
+              source={require('../appAssets/footer/home.png')}
+              alt="Alternate Text"
+              style={{marginTop: 20}}
+            />
+          </TouchableOpacity>
+          {/* <TouchableOpacity>
+            <Image
+              size={150}
+              source={require('../appAssets/footer/detail.png')}
+              alt="Alternate Text"
+              style={{marginTop: 20}}
+            />
+          </TouchableOpacity> */}
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Profile', {childId})}>
+            <Image
+              size={150}
+              source={require('../appAssets/footer/profile.png')}
+              alt="Alternate Text"
+              style={{marginTop: 20}}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

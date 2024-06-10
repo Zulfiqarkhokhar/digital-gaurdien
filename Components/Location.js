@@ -30,6 +30,7 @@ const Location = ({navigation}) => {
             latitude: response.location.latitude,
             longitude: response.location.longitude,
           });
+          console.log(response);
         } else {
           console.log('an error occurred');
         }
@@ -54,18 +55,29 @@ const Location = ({navigation}) => {
           backgroundColor: '#190152',
           width: 370,
           height: 80,
-          justifyContent: 'center',
+          flexDirection: 'row',
           alignItems: 'center',
           position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
         }}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('ParentDashboard', {childId})}>
+          <Image
+            style={{width: 30, height: 30, marginLeft: 10}}
+            source={require('../appAssets/arrow-left.png')}
+            alt="Alternate Text"
+            //   style={{ marginTop: 15, marginLeft: 15, marginRight: 5 }}
+          />
+        </TouchableOpacity>
         <Text
           style={{
             color: '#fff',
             fontSize: 25,
             fontWeight: 'bold',
+            position: 'absolute',
+            left: 130,
           }}>
           Location
         </Text>
@@ -100,7 +112,7 @@ const Location = ({navigation}) => {
               latitude: location.latitude,
               longitude: location.longitude,
             }}
-            radius={100}
+            radius={1000}
             strokeColor="rgba(0, 0, 255, 0.5)"
             fillColor="rgba(0, 0, 255, 0.2)"
           />
@@ -152,12 +164,12 @@ const Location = ({navigation}) => {
         <View
           style={{
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: 'space-evenly',
             marginLeft: 30,
             marginRight: 30,
           }}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('ParentDashboard')}>
+            onPress={() => navigation.navigate('ParentDashboard', {childId})}>
             <Image
               size={150}
               source={require('../appAssets/footer/home.png')}
@@ -165,15 +177,16 @@ const Location = ({navigation}) => {
               style={{marginTop: 20}}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <Image
               size={150}
               source={require('../appAssets/footer/detail.png')}
               alt="Alternate Text"
               style={{marginTop: 20}}
             />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+          </TouchableOpacity> */}
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Profile', {childId})}>
             <Image
               size={150}
               source={require('../appAssets/footer/profile.png')}

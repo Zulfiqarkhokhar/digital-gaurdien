@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useRoute} from '@react-navigation/native';
 import {
   View,
   Text,
@@ -8,9 +9,12 @@ import {
   Button,
   Image,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
 
 const ClockSlider = ({navigation}) => {
+  const route = useRoute();
+  const {childId} = route.params;
+  console.log(childId);
+
   const [startHour, setStartHour] = useState('');
   const [endHour, setEndHour] = useState('');
 
@@ -34,18 +38,30 @@ const ClockSlider = ({navigation}) => {
           backgroundColor: '#190152',
           width: 370,
           height: 80,
-          justifyContent: 'center',
+          justifyContent: 'space-between',
           alignItems: 'center',
+          flexDirection: 'row',
           position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
         }}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('ScreenTime', {childId})}>
+          <Image
+            style={{width: 30, height: 30, marginLeft: 10}}
+            source={require('../appAssets/arrow-left.png')}
+            alt="Alternate Text"
+            //   style={{ marginTop: 15, marginLeft: 15, marginRight: 5 }}
+          />
+        </TouchableOpacity>
         <Text
           style={{
             color: '#fff',
             fontSize: 25,
             fontWeight: 'bold',
+            position: 'absolute',
+            left: 100,
           }}>
           Set Screen Time
         </Text>
@@ -69,9 +85,54 @@ const ClockSlider = ({navigation}) => {
       </View>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('ScreenTime')}>
+        onPress={() => navigation.navigate('ScreenTime', {childId})}>
         <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
+      <View
+        style={{
+          width: 360,
+          backgroundColor: '#190152',
+          height: 60,
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+        }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            marginLeft: 30,
+            marginRight: 30,
+          }}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('ParentDashboard', {childId})}>
+            <Image
+              size={150}
+              source={require('../appAssets/footer/home.png')}
+              alt="Alternate Text"
+              style={{marginTop: 20}}
+            />
+          </TouchableOpacity>
+          {/* <TouchableOpacity>
+            <Image
+              size={150}
+              source={require('../appAssets/footer/detail.png')}
+              alt="Alternate Text"
+              style={{marginTop: 20}}
+            />
+          </TouchableOpacity> */}
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Profile', {childId})}>
+            <Image
+              size={150}
+              source={require('../appAssets/footer/profile.png')}
+              alt="Alternate Text"
+              style={{marginTop: 20}}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };

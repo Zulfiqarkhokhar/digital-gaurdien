@@ -25,6 +25,7 @@ import Notifications from './Components/Notifications';
 import {AuthProvider} from './Components/AuthContext';
 import ScreenShot from './Components/ScreenShot';
 import ChildList from './Components/ChildList';
+import AboutUs from './Components/AboutUs';
 
 const Stack = createStackNavigator();
 export default function App() {
@@ -139,6 +140,11 @@ export default function App() {
           <Stack.Screen
             name="Children"
             component={ChildList}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="AboutUs"
+            component={AboutUs}
             options={{headerShown: false}}
           />
           {/* <Stack.Screen

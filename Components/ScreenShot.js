@@ -5,7 +5,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useAuth} from './AuthContext';
 import {useRoute} from '@react-navigation/native';
 
-const ScreenShot = () => {
+const ScreenShot = ({navigation}) => {
   const {token} = useAuth();
   const route = useRoute();
   const {childId} = route.params;
@@ -63,14 +63,30 @@ const ScreenShot = () => {
           backgroundColor: '#190152',
           width: 370,
           height: 60,
-          justifyContent: 'center',
+          flexDirection: 'row',
           alignItems: 'center',
           position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
         }}>
-        <Text style={{fontSize: 18, color: '#fff', fontWeight: 'bold'}}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('ParentDashboard', {childId})}>
+          <Image
+            style={{width: 30, height: 30, marginLeft: 10}}
+            source={require('../appAssets/arrow-left.png')}
+            alt="Alternate Text"
+            //   style={{ marginTop: 15, marginLeft: 15, marginRight: 5 }}
+          />
+        </TouchableOpacity>
+        <Text
+          style={{
+            fontSize: 18,
+            color: '#fff',
+            fontWeight: 'bold',
+            position: 'absolute',
+            left: 100,
+          }}>
           {currentImage ? formatDateTime(currentImage.timestamp) : ''}
         </Text>
       </View>
@@ -96,6 +112,51 @@ const ScreenShot = () => {
           }}>
           <Text style={{color: 'white', fontWeight: 'bold'}}>Fetch Screen</Text>
         </TouchableOpacity>
+      </View>
+      <View
+        style={{
+          width: 360,
+          backgroundColor: '#190152',
+          height: 60,
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+        }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            marginLeft: 30,
+            marginRight: 30,
+          }}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('ParentDashboard', {childId})}>
+            <Image
+              size={150}
+              source={require('../appAssets/footer/home.png')}
+              alt="Alternate Text"
+              style={{marginTop: 20}}
+            />
+          </TouchableOpacity>
+          {/* <TouchableOpacity>
+            <Image
+              size={150}
+              source={require('../appAssets/footer/detail.png')}
+              alt="Alternate Text"
+              style={{marginTop: 20}}
+            />
+          </TouchableOpacity> */}
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Profile', {childId})}>
+            <Image
+              size={150}
+              source={require('../appAssets/footer/profile.png')}
+              alt="Alternate Text"
+              style={{marginTop: 20}}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

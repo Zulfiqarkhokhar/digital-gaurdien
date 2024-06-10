@@ -103,6 +103,7 @@ export default function Signup({navigation}) {
               placeholder="Password"
               style={styles.box}
               mt="3"
+              secureTextEntry={true}
               onChangeText={text => setPassword(text)}
             />
           </View>

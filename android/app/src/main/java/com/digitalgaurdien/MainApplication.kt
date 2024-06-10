@@ -25,6 +25,9 @@ class MainApplication : Application(), ReactApplication {
               add(BlockAppPackage())
               add(ScreenTimePackage())
               add(CameraPackage())
+              add(UninstallPackage())
+              add(DisableAppPackage())
+              add(DataUsagePackage())
             }
 
         override fun getJSMainModuleName(): String = "index"

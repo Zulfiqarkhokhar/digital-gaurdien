@@ -125,9 +125,10 @@ export default function Login({navigation}) {
                 placeholder="Password"
                 style={styles.input}
                 mt="3"
+                secureTextEntry={true}
                 onChangeText={text => setPassword(text)}
               />
-              <Link
+              {/* <Link
                 _text={{
                   fontSize: 'xs',
                   fontWeight: '500',
@@ -137,7 +138,7 @@ export default function Login({navigation}) {
                 mt="1"
                 href="#">
                 Forget Password?
-              </Link>
+              </Link> */}
             </View>
           </Box>
 

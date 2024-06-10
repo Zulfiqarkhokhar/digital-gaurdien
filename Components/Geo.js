@@ -1,10 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TextInput, Button} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import MapView, {Marker, Circle} from 'react-native-maps';
 import {useAuth} from './AuthContext';
 import {useRoute} from '@react-navigation/native';
 
-const Geo = () => {
+const Geo = ({navigation}) => {
   const route = useRoute();
   const data = route.params.location;
   const childId = route.params.childId;
@@ -132,15 +139,26 @@ const Geo = () => {
       <View
         style={{
           height: 80,
-          justifyContent: 'center',
+          flexDirection: 'row',
           alignItems: 'center',
           backgroundColor: '#190152',
         }}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Location', {childId})}>
+          <Image
+            style={{width: 30, height: 30, marginLeft: 10}}
+            source={require('../appAssets/arrow-left.png')}
+            alt="Alternate Text"
+            //   style={{ marginTop: 15, marginLeft: 15, marginRight: 5 }}
+          />
+        </TouchableOpacity>
         <Text
           style={{
             color: message === 'Child is inside fence' ? '#fff' : 'red',
             fontSize: 20,
             fontWeight: 'bold',
+            position: 'absolute',
+            left: 90,
           }}>
           {message}
         </Text>

@@ -1,7 +1,7 @@
 import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 
-const Profile = ({navigation}) => {
+const AboutUs = ({navigation}) => {
   const route = useRoute();
   const {childId} = route.params;
   console.log(childId);
@@ -26,7 +26,7 @@ const Profile = ({navigation}) => {
           right: 0,
         }}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('ParentDashboard', {childId})}>
+          onPress={() => navigation.navigate('Profile', {childId})}>
           <Image
             style={{width: 30, height: 30, marginLeft: 10}}
             source={require('../appAssets/arrow-left.png')}
@@ -40,84 +40,83 @@ const Profile = ({navigation}) => {
             fontSize: 25,
             fontWeight: 'bold',
             position: 'absolute',
-            left: 140,
+            left: 120,
           }}>
-          Profile
+          About Us
         </Text>
       </View>
 
       <View>
-        <View style={{}}>
+        <View>
           <Image
-            source={require('../appAssets/profile.png')}
+            source={require('../appAssets/sajid.png')}
             style={{
               width: 100,
               height: 100,
-              position: 'relative',
-              top: 0,
-              left: 110,
-              marginBottom: 30,
+              marginBottom: 10,
+              borderRadius: 50,
+              marginLeft: 50,
             }}></Image>
-          <Text style={{textAlign: 'center', fontSize: 20, color: '#000'}}>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: 20,
+              color: '#000',
+              fontWeight: 'bold',
+            }}>
             Sajid Ali
           </Text>
+          <Text style={{textAlign: 'center', fontSize: 25, color: '#000'}}>
+            Backend Developer
+          </Text>
         </View>
-        <View style={{margin: 10, position: 'relative', left: 40}}>
-          <TouchableOpacity
-            style={{flexDirection: 'row'}}
-            onPress={() => navigation.navigate('Signup')}>
-            <Image
-              source={require('../appAssets/add.png')}
-              style={{width: 30, height: 30}}></Image>
-            <Text style={{margin: 5}}>Add another parent account</Text>
-          </TouchableOpacity>
+        <View>
+          <Image
+            source={require('../appAssets/zulfiqar.png')}
+            style={{
+              width: 100,
+              height: 100,
+              marginBottom: 10,
+              borderRadius: 50,
+              marginLeft: 50,
+            }}></Image>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: 20,
+              color: '#000',
+              fontWeight: 'bold',
+            }}>
+            Zulfiqar Ali
+          </Text>
+          <Text style={{textAlign: 'center', fontSize: 25, color: '#000'}}>
+            Frontend Developer
+          </Text>
         </View>
-        <View
-          style={{
-            backgroundColor: '#190152',
-            height: 5,
-            width: 320,
-            borderRadius: 10,
-          }}></View>
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate('AboutUs', {childId})}>
+        <View>
+          <Image
+            source={require('../appAssets/iqra.jpg')}
+            style={{
+              width: 100,
+              height: 100,
+              marginBottom: 10,
+              borderRadius: 50,
+              marginLeft: 50,
+            }}></Image>
           <Text
             style={{
               textAlign: 'center',
               fontSize: 20,
               color: '#000',
-              margin: 10,
+              fontWeight: 'bold',
             }}>
-            About Us
+            Iqra Nadeem
           </Text>
-        </TouchableOpacity>
-        {/* <TouchableOpacity>
-          <Text
-            style={{
-              textAlign: 'center',
-              fontSize: 20,
-              color: '#000',
-              margin: 10,
-            }}>
-            Help Center
+          <Text style={{textAlign: 'center', fontSize: 25, color: '#000'}}>
+            UI/UX Designer
           </Text>
-        </TouchableOpacity> */}
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Text
-            style={{
-              textAlign: 'center',
-              fontSize: 20,
-              color: '#000',
-              margin: 10,
-            }}>
-            Logout
-          </Text>
-        </TouchableOpacity>
+        </View>
       </View>
-
-      {/* Footer Here */}
-
       <View
         style={{
           width: 360,
@@ -152,7 +151,8 @@ const Profile = ({navigation}) => {
               style={{marginTop: 20}}
             />
           </TouchableOpacity> */}
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Profile', {childId})}>
             <Image
               size={150}
               source={require('../appAssets/footer/profile.png')}
@@ -166,12 +166,4 @@ const Profile = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  line: {
-    width: '100%', // Take up full width
-    height: 1, // Adjust height as needed
-    backgroundColor: '#000', // Change color as needed
-  },
-});
-
-export default Profile;
+export default AboutUs;

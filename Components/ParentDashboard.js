@@ -22,7 +22,7 @@ export default function ParentDashboard({navigation}) {
       icon: require('../appAssets/features/location.png'),
     },
     {
-      name: 'Block App',
+      name: 'Applications',
       icon: require('../appAssets/features/block.png'),
     },
     {
@@ -33,10 +33,10 @@ export default function ParentDashboard({navigation}) {
       name: 'Camera',
       icon: require('../appAssets/features/camera.png'),
     },
-    {
-      name: 'Audio',
-      icon: require('../appAssets/features/audio.png'),
-    },
+    // {
+    //   name: 'Audio',
+    //   icon: require('../appAssets/features/audio.png'),
+    // },
     {
       name: 'Mirroring',
       icon: require('../appAssets/features/mirror.png'),
@@ -45,14 +45,14 @@ export default function ParentDashboard({navigation}) {
       name: 'Data Usage',
       icon: require('../appAssets/features/data.png'),
     },
-    {
-      name: 'Notification',
-      icon: require('../appAssets/features/notification.png'),
-    },
-    {
-      name: 'Activity',
-      icon: require('../appAssets/features/activity.png'),
-    },
+    // {
+    //   name: 'Notification',
+    //   icon: require('../appAssets/features/notification.png'),
+    // },
+    // {
+    //   name: 'Activity',
+    //   icon: require('../appAssets/features/activity.png'),
+    // },
   ];
 
   const handleClick = name => {
@@ -63,14 +63,14 @@ export default function ParentDashboard({navigation}) {
         break;
       }
       case 'Data Usage': {
-        navigation.navigate('DataUsage');
+        navigation.navigate('DataUsage', {childId});
         break;
       }
       case 'Screen Time': {
-        navigation.navigate('ScreenTime');
+        navigation.navigate('ScreenTime', {childId});
         break;
       }
-      case 'Block App': {
+      case 'Applications': {
         navigation.navigate('Applications', {childId});
         break;
       }
@@ -144,7 +144,7 @@ export default function ParentDashboard({navigation}) {
               </Text>
             </View>
             <TouchableOpacity
-              onPress={() => navigation.navigate('SignupChild')}>
+              onPress={() => navigation.navigate('SignupChild', {childId})}>
               <Image
                 size={150}
                 borderRadius={100}
@@ -176,7 +176,9 @@ export default function ParentDashboard({navigation}) {
               marginRight: 20,
               borderWidth: 1,
               borderColor: 'grey',
-              padding: 15,
+              paddingLeft: 15,
+              paddingRight: 15,
+              paddingTop: 20,
             }}>
             <View
               style={{
@@ -186,7 +188,7 @@ export default function ParentDashboard({navigation}) {
               <Image
                 source={require('../appAssets/hero.png')}
                 alt="Alternate Text"
-                style={{width: '100%', height: 200}}
+                style={{width: '100%', height: 160, borderRadius: 10}}
               />
             </View>
           </View>
@@ -215,7 +217,7 @@ export default function ParentDashboard({navigation}) {
                     flex: 1,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    paddingBottom: 15,
+                    paddingBottom: 40,
                   }}>
                   <View
                     style={{
@@ -254,7 +256,7 @@ export default function ParentDashboard({navigation}) {
           <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'space-between',
+              justifyContent: 'space-evenly',
               marginLeft: 30,
               marginRight: 30,
             }}>
@@ -266,15 +268,16 @@ export default function ParentDashboard({navigation}) {
                 style={{marginTop: 20}}
               />
             </TouchableOpacity>
-            <TouchableOpacity>
+            {/* <TouchableOpacity>
               <Image
                 size={150}
                 source={require('../appAssets/footer/detail.png')}
                 alt="Alternate Text"
                 style={{marginTop: 20}}
               />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+            </TouchableOpacity> */}
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Profile', {childId})}>
               <Image
                 size={150}
                 source={require('../appAssets/footer/profile.png')}
